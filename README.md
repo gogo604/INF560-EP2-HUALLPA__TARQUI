@@ -1,58 +1,187 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# TuriPotosí
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema web de gestión y reserva de tours turísticos en la ciudad de Potosí, desarrollado como proyecto para la asignatura INF-560.
 
-## About Laravel
+## Descripción del proyecto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+TuriPotosí es una aplicación web que permite explorar tours turísticos, consultar sus características y realizar reservas. También ofrece herramientas de administración para gestionar tours y reservas, y un espacio para que los guías consulten los tours que tienen asignados.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+El sistema cuenta con tres roles principales: administrador, guía y turista.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tecnologías utilizadas
 
-## Learning Laravel
+- **Backend:** Laravel 13.
+- **Lenguaje:** PHP.
+- **Base de datos:** PostgreSQL.
+- **Frontend:** Blade y Tailwind CSS 4.
+- **Herramientas de compilación:** Vite y npm.
+- **Autenticación:** Laravel Breeze.
+- **Gestión de roles y permisos:** Spatie Laravel Permission.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Funcionalidades principales
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Visitantes
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+- Consultar el catálogo público de tours.
+- Filtrar y explorar las opciones turísticas.
+- Consultar los detalles de cada tour.
+- Registrarse como turista e iniciar sesión.
 
-## Agentic Development
+### Turistas
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+- Explorar tours disponibles.
+- Realizar reservas indicando la cantidad de personas.
+- Consultar sus reservas.
+- Cancelar sus propias reservas cuando corresponda.
 
-```bash
-composer require laravel/boost --dev
+### Guías
 
-php artisan boost:install
+- Iniciar sesión con una cuenta asignada por el administrador.
+- Consultar los tours que tienen asignados.
+- Revisar información, servicios y reservas de sus tours.
+
+### Administradores
+
+- Administrar los tours turísticos.
+- Crear, editar y eliminar tours.
+- Asignar guías a los tours.
+- Gestionar imágenes, categorías y servicios de los tours.
+- Consultar las reservas registradas.
+- Actualizar el estado de las reservas.
+
+## Requisitos para ejecutar el proyecto
+
+Antes de instalar el proyecto, se necesita:
+
+- PHP 8.3 o superior.
+- Composer.
+- Node.js y npm.
+- PostgreSQL.
+- Git.
+
+## Instalación
+
+### 1. Clonar el repositorio
+
+Clonar el repositorio desde GitHub y entrar a la carpeta del proyecto:
+
+```powershell
+git clone https://github.com/gogo604/INF560-EP2-HUALLPA__TARQUI.git
+cd TuriPotosi
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Instalar dependencias de PHP
 
-## Contributing
+```powershell
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Instalar dependencias de JavaScript
 
-## Code of Conduct
+```powershell
+npm install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 4. Configurar las variables de entorno
 
-## Security Vulnerabilities
+Crear el archivo `.env` a partir del archivo de ejemplo:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```powershell
+Copy-Item .env.example .env
+```
 
-## License
+Generar la clave de la aplicación:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```powershell
+php artisan key:generate
+```
+
+### 5. Configurar PostgreSQL
+
+Crear una base de datos en PostgreSQL y configurar los siguientes valores en el archivo `.env`:
+
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=turpotosi
+DB_USERNAME=postgres
+DB_PASSWORD=
+```
+
+La contraseña debe corresponder a la configurada en la instalación local de PostgreSQL.
+
+### 6. Ejecutar las migraciones y los seeders
+
+```powershell
+php artisan migrate --seed
+```
+
+Este comando crea las tablas necesarias y carga los datos iniciales del sistema, incluidos roles, usuarios, categorías, servicios, tours y reservas.
+
+### 7. Crear el enlace de almacenamiento
+
+```powershell
+php artisan storage:link
+```
+
+### 8. Compilar los archivos del frontend
+
+```powershell
+npm run build
+```
+
+### 9. Iniciar el servidor
+
+```powershell
+php artisan serve
+```
+
+Abrir en el navegador:
+
+```text
+http://127.0.0.1:8000
+```
+
+## Cuentas de prueba
+
+El proyecto incluye cuentas de prueba para los diferentes roles. Todas utilizan la siguiente contraseña:
+
+```text
+password
+```
+
+| Rol | Correo electrónico |
+|---|---|
+| Administrador | admin@turipotosi.test |
+| Guía 1 | guia1@turipotosi.test |
+| Guía 2 | guia2@turipotosi.test |
+| Turista 1 | turista1@turipotosi.test |
+| Turista 2 | turista2@turipotosi.test |
+
+Estas credenciales son únicamente para pruebas y desarrollo local. No deben utilizarse en un entorno de producción.
+
+## Estructura general del sistema
+
+- `app/Models`: modelos y relaciones de la aplicación.
+- `app/Http/Controllers`: controladores del sistema.
+- `app/Http/Requests`: validaciones de formularios.
+- `app/Policies`: políticas de autorización.
+- `database/migrations`: estructura de la base de datos.
+- `database/seeders`: datos iniciales.
+- `resources/views`: vistas Blade.
+- `resources/css`: estilos del frontend.
+- `routes/web.php`: rutas de la aplicación.
+- `public/images`: imágenes públicas del proyecto.
+
+## Seguridad
+
+- Los visitantes pueden registrarse únicamente como turistas.
+- Los roles de administrador y guía son asignados por usuarios autorizados.
+- Las rutas administrativas y de guías están protegidas mediante middleware.
+- Las reservas están protegidas mediante autenticación y políticas de autorización.
+- Se valida la disponibilidad de cupos antes de registrar reservas.
+
+## Autor
+
+Proyecto académico desarrollado para la asignatura INF-560.
