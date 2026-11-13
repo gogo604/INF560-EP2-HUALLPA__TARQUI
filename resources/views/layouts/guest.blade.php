@@ -1,30 +1,4 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
-        </div>
-    </body>
-</html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="csrf-token" content="{{ csrf_token() }}"><title>{{ config('app.name', 'TuriPotosí') }}</title><link rel="preconnect" href="https://fonts.bunny.net"><link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800&display=swap" rel="stylesheet">@vite(['resources/css/app.css', 'resources/js/app.js'])</head>
+<body class="min-h-screen bg-[#fffaf9] font-sans text-zinc-900 antialiased"><div class="grid min-h-screen lg:grid-cols-2"><section class="relative hidden overflow-hidden bg-red-950 lg:block"><img src="{{ asset('images/potosi-hero.jpg') }}" alt="Ciudad de Potosí" class="absolute inset-0 h-full w-full object-cover"><div class="absolute inset-0 bg-gradient-to-br from-red-950/95 via-red-900/75 to-black/30"></div><a href="{{ route('home') }}" class="absolute left-10 top-9 z-10 text-3xl font-black text-white">Turi<span class="text-red-300">Potosí</span><span class="mt-1 block text-xs font-medium tracking-widest text-red-100">DESCUBRE · VIAJA · VIVE</span></a><div class="absolute bottom-16 left-10 right-10 z-10 max-w-xl text-white"><p class="text-xs font-bold tracking-[.25em] text-red-200">PATRIMONIO · CULTURA · AVENTURA</p><h1 class="mt-4 text-5xl font-black leading-tight">La magia de Potosí te espera.</h1><p class="mt-5 max-w-md text-lg leading-relaxed text-white/85">Descubre lugares extraordinarios y vive experiencias auténticas en el corazón de Bolivia.</p></div></section><main class="flex items-center justify-center px-5 py-12 sm:px-10"><div class="w-full max-w-md"><a href="{{ route('home') }}" class="mb-8 inline-flex items-center gap-2 text-sm font-bold text-red-700 hover:text-red-800 lg:hidden">← Volver a TuriPotosí</a><div class="mb-8 text-center lg:hidden"><span class="text-3xl font-black">Turi<span class="text-red-700">Potosí</span></span></div><div class="rounded-3xl border border-zinc-100 bg-white p-7 shadow-xl shadow-zinc-200/60 sm:p-9">{{ $slot }}</div><p class="mt-7 text-center text-xs text-zinc-400">© {{ date('Y') }} TuriPotosí · Todos los derechos reservados</p></div></main></div></body></html>

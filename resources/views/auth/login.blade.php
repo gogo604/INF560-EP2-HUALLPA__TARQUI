@@ -1,47 +1,117 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<div class="mb-8 text-center">
+    <span class="text-xs font-bold tracking-[.2em] text-red-700">
+        BIENVENIDO DE NUEVO
+    </span>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+    <h1 class="mt-2 text-3xl font-black tracking-tight text-zinc-900">
+        Iniciar sesión
+    </h1>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    <p class="mt-2 text-sm text-zinc-500">
+        Ingresa a tu cuenta para continuar tu experiencia en Potosí.
+    </p>
+</div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+<x-auth-session-status class="mb-4" :status="session('status')" />
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+<form method="POST" action="{{ route('login') }}" class="space-y-5">
+    @csrf
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+    <!-- Correo electrónico -->
+    <div>
+        <label for="email" class="mb-2 block text-sm font-semibold text-zinc-700">
+            Correo electrónico
+        </label>
+
+        <input
+            id="email"
+            type="email"
+            name="email"
+            value="{{ old('email') }}"
+            placeholder="nombre@correo.com"
+            required
+            autofocus
+            autocomplete="username"
+            class="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-red-600 focus:bg-white focus:ring-2 focus:ring-red-100"
+        >
+
+        @error('email')
+            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <!-- Contraseña -->
+    <div>
+        <div class="mb-2 flex items-center justify-between gap-3">
+            <label for="password" class="text-sm font-semibold text-zinc-700">
+                Contraseña
             </label>
-        </div>
 
-        <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+                <a
+                    href="{{ route('password.request') }}"
+                    class="text-xs font-semibold text-red-700 hover:text-red-900"
+                >
+                    ¿Olvidaste tu contraseña?
                 </a>
             @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
         </div>
-    </form>
-</x-guest-layout>
+
+        <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="Ingresa tu contraseña"
+            required
+            autocomplete="current-password"
+            class="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-red-600 focus:bg-white focus:ring-2 focus:ring-red-100"
+        >
+
+        @error('password')
+            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <!-- Recordar sesión -->
+    <label class="flex cursor-pointer items-center gap-2 text-sm text-zinc-600">
+        <input
+            type="checkbox"
+            name="remember"
+            class="rounded border-zinc-300 text-red-700 focus:ring-red-600"
+        >
+        <span>Recordar mi sesión</span>
+    </label>
+
+    <!-- Botón -->
+    <button
+        type="submit"
+        class="flex w-full items-center justify-center gap-3 rounded-xl bg-red-700 px-5 py-3.5 font-bold text-white shadow-lg shadow-red-700/20 transition hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
+    >
+        Ingresar a mi cuenta
+        <span>→</span>
+    </button>
+</form>
+
+@if (Route::has('register'))
+    <div class="mt-7 border-t border-zinc-100 pt-6 text-center">
+        <p class="text-sm text-zinc-500">
+            ¿Todavía no tienes cuenta?
+            <a
+                href="{{ route('register') }}"
+                class="font-bold text-red-700 hover:text-red-900"
+            >
+                Crear una cuenta
+            </a>
+        </p>
+    </div>
+@endif
+
+<div class="mt-5 text-center">
+    <a
+        href="{{ route('home') }}"
+        class="text-xs font-medium text-zinc-400 hover:text-red-700"
+    >
+        ← Volver al inicio
+    </a>
+</div>
